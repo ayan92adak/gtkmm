@@ -1,15 +1,12 @@
-#include <gtkmm/main.h>
-#include "HelloWorldWindow.h"
+#include "CalenderWindow.h"
+#include <gtkmm/application.h>
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
-    // Initialization
-    Gtk::Main kit(argc, argv);
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
-    // Create a hello world window object
-    HelloWorldWindow example;
+  CalenderWindow window;
 
-    // gtkmm main loop
-    Gtk::Main::run(example);
-    return 0;
+  //Shows the window and returns when it is closed.
+  return app->run(window);
 }

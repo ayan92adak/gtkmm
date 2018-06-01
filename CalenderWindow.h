@@ -1,13 +1,10 @@
-#ifndef GTKMM_EXAMPLEWINDOW_H
-#define GTKMM_EXAMPLEWINDOW_H
-
 #include <gtkmm.h>
 
-class ExampleWindow : public Gtk::Window
+class CalenderWindow : public Gtk::Window
 {
 public:
   CalenderWindow();
-  virtual ~Calender();
+  virtual ~CalenderWindow();
 
 protected:
   //Signal handlers:
