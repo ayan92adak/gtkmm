@@ -2,9 +2,12 @@
 #include <iostream>
 #include <cstdio>
 
+
+using namespace std;
+
 CalenderWindow::CalenderWindow()
 :
-  m_Frame_NotAccelerated("Not accelerated"),
+  m_Frame_NotAccelerated(),
   m_VBox_Main(Gtk::ORIENTATION_VERTICAL, 5),
   m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_VBox_Day(Gtk::ORIENTATION_VERTICAL),
@@ -74,8 +77,9 @@ CalenderWindow::CalenderWindow()
   // m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
   //             &CalenderWindow::on_button_close) );
   // m_VBox_Main.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
-  m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
-  &CalenderWindow::on_button_close) );
+  m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,&CalenderWindow::on_button_close) );
+  m_Entry_Display.set_alignment(1);
+  m_Entry_Display.set_text("0");
   m_Grid.attach(m_Entry_Display,1,1,3,1);
   m_Grid.attach(m_Button_ONE,1,2,1,1);
   m_Grid.attach(m_Button_TWO,2,2,1,1);
@@ -87,6 +91,10 @@ CalenderWindow::CalenderWindow()
   m_Grid.attach(m_Button_EIGHT,2,4,1,1);
   m_Grid.attach(m_Button_NINE,3,4,1,1);
   m_Frame_NotAccelerated.add(m_Grid);
+
+  //signals
+
+  //m_Button_NINE.signal_clicked().connect(sigc::mem_fun(*this,&CalenderWindow::m_Entry_Display.set_text("9")));
 
   show_all_children();
 }
