@@ -12,6 +12,7 @@ protected:
   void on_checkbutton_numeric();
   void on_spinbutton_digits_changed();
   void on_button_close();
+  void on_button_press(Glib::ustring);
 
   enum enumValueFormats
   {
@@ -30,6 +31,7 @@ protected:
   Gtk::Button m_Button_FOUR, m_Button_FIVE, m_Button_SIX;
   Gtk::Button m_Button_SEVEN, m_Button_EIGHT, m_Button_NINE, m_Button_ZERO;
   Gtk::Button m_Button_ADD, m_Button_SUB, m_Button_MUL, m_Button_DIV;
+  Gtk::Button m_Button_DEC, m_Button_EQL;
   Gtk::CheckButton m_CheckButton_Snap, m_CheckButton_Numeric;
   Gtk::Button m_Button_Close;
   Gtk::Grid m_Grid;

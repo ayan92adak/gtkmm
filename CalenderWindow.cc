@@ -30,6 +30,12 @@ CalenderWindow::CalenderWindow()
   m_Button_NINE("9"),
   m_Button_ZERO("0"),
   m_Button_Close("Close"),
+  m_Button_ADD("+"),
+  m_Button_SUB("-"),
+  m_Button_MUL("*"),
+  m_Button_DIV("/"),
+  m_Button_DEC("."),
+  m_Button_EQL("="),
   m_Grid()
 {
   set_title("SpinButton");
@@ -78,9 +84,18 @@ CalenderWindow::CalenderWindow()
   //             &CalenderWindow::on_button_close) );
   // m_VBox_Main.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,&CalenderWindow::on_button_close) );
+  m_Button_ONE.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "1" ));
+  m_Button_TWO.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "2" ));
+  m_Button_THREE.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "3" ));
+  m_Button_FOUR.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "4" ));
+  m_Button_FIVE.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "5" ));
+  m_Button_SIX.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "6" ));
+  m_Button_SEVEN.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "7" ));
+  m_Button_EIGHT.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "8" ));
+  m_Button_NINE.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "9" ));
   m_Entry_Display.set_alignment(1);
   m_Entry_Display.set_text("0");
-  m_Grid.attach(m_Entry_Display,1,1,3,1);
+  m_Grid.attach(m_Entry_Display,1,1,5,1);
   m_Grid.attach(m_Button_ONE,1,2,1,1);
   m_Grid.attach(m_Button_TWO,2,2,1,1);
   m_Grid.attach(m_Button_THREE,3,2,1,1);
@@ -90,7 +105,14 @@ CalenderWindow::CalenderWindow()
   m_Grid.attach(m_Button_SEVEN,1,4,1,1);
   m_Grid.attach(m_Button_EIGHT,2,4,1,1);
   m_Grid.attach(m_Button_NINE,3,4,1,1);
+  m_Grid.attach(m_Button_ADD,4,2,1,1);
+  m_Grid.attach(m_Button_SUB,5,2,1,1);
+  m_Grid.attach(m_Button_MUL,4,3,1,1);
+  m_Grid.attach(m_Button_DIV,5,3,1,1);
+  m_Grid.attach(m_Button_DEC,4,4,1,1);
+  m_Grid.attach(m_Button_EQL,5,4,1,1);
   m_Frame_NotAccelerated.add(m_Grid);
+
 
   //signals
 
@@ -107,5 +129,10 @@ CalenderWindow::~CalenderWindow()
 void CalenderWindow::on_button_close()
 {
   hide();
+}
+
+void CalenderWindow::on_button_press(Glib::ustring button)
+{
+  m_Entry_Display.set_text(button);
 }
 
