@@ -1,4 +1,5 @@
 #include "CalenderWindow.h"
+#include "Calculate.h"
 #include <iostream>
 #include <cstdio>
 
@@ -36,6 +37,9 @@ CalenderWindow::CalenderWindow()
   m_Button_DIV("/"),
   m_Button_DEC("."),
   m_Button_EQL("="),
+  m_Op(E_NONE),
+  x(0),
+  y(0),
   m_Grid()
 {
   set_title("SpinButton");
@@ -93,6 +97,8 @@ CalenderWindow::CalenderWindow()
   m_Button_SEVEN.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "7" ));
   m_Button_EIGHT.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "8" ));
   m_Button_NINE.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "9" ));
+  m_Button_ADD.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "add" ));
+  m_Button_EQL.signal_clicked().connect( sigc::bind<Glib::ustring>(sigc::mem_fun(*this,&CalenderWindow::on_button_press), "eql" ));
   m_Entry_Display.set_alignment(1);
   m_Entry_Display.set_text("0");
   m_Grid.attach(m_Entry_Display,1,1,5,1);
@@ -114,10 +120,6 @@ CalenderWindow::CalenderWindow()
   m_Frame_NotAccelerated.add(m_Grid);
 
 
-  //signals
-
-  //m_Button_NINE.signal_clicked().connect(sigc::mem_fun(*this,&CalenderWindow::m_Entry_Display.set_text("9")));
-
   show_all_children();
 }
 
@@ -132,7 +134,36 @@ void CalenderWindow::on_button_close()
 }
 
 void CalenderWindow::on_button_press(Glib::ustring button)
-{
-  m_Entry_Display.set_text(button);
+{ 
+  std::string s = m_Entry_Display.get_text();
+  if((std::string)(button) == "add")
+  {
+    m_Op = E_ADD;
+    x = std::stoi(s,nullptr,10);
+  }else if((std::string)(button) == "sub")
+  {
+    m_Op = E_SUB;
+    x = std::stoi(s,nullptr,10);
+  }else if((std::string)(button) == "eql")
+  {
+    y = std::stoi(s,nullptr,10);
+    if(m_Op == E_ADD){
+      int result = calculate::add(x,y);
+      m_Entry_Display.set_text(std::to_string(result));
+      m_Op = E_NONE;
+    }      
+
+  }
+  else if(s=="0"){
+      m_Entry_Display.set_text((std::string)button);
+  }else{
+        if(m_Op == E_ADD){
+          m_Entry_Display.set_text("");
+          m_Entry_Display.set_text((std::string)button);
+        }else{
+        s=s+(std::string)button;
+        m_Entry_Display.set_text(s);
+       }
+  }
 }
 

@@ -1,10 +1,22 @@
 #include <gtkmm.h>
 
+typedef enum
+  {
+    E_NONE,
+    E_ADD,
+    E_SUB,
+    E_MUL,
+    E_DIV
+  } E_Operatiion;
+
 class CalenderWindow : public Gtk::Window
 {
+private:
+  int x,y;
 public:
   CalenderWindow();
   virtual ~CalenderWindow();
+
 
 protected:
   //Signal handlers:
@@ -13,13 +25,9 @@ protected:
   void on_spinbutton_digits_changed();
   void on_button_close();
   void on_button_press(Glib::ustring);
+  //void on_button_getvalue(enumValueFormats display);
+  E_Operatiion m_Op;
 
-  enum enumValueFormats
-  {
-    VALUE_FORMAT_INT,
-    VALUE_FORMAT_FLOAT
-  };
-  void on_button_getvalue(enumValueFormats display);
 
   //Child widgets:
   Gtk::Frame m_Frame_NotAccelerated;
