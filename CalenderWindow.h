@@ -25,6 +25,8 @@ protected:
   void on_spinbutton_digits_changed();
   void on_button_close();
   void on_button_press(Glib::ustring);
+  void on_button_press_op(Glib::ustring);
+  void on_button_press_eql();
   //void on_button_getvalue(enumValueFormats display);
   E_Operatiion m_Op;
 
