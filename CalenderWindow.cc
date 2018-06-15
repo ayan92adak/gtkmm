@@ -101,7 +101,7 @@ void CalenderWindow::on_button_close()
 
 void CalenderWindow::on_button_press(Glib::ustring button)
 { 
-  std::cout<<"digit button pressed"<<std::endl;
+  //std::cout<<"digit button pressed"<<std::endl;
   std::string s = m_Entry_Display.get_text();
   if(s=="0"){
       m_Entry_Display.set_text((std::string)button);
@@ -117,7 +117,7 @@ void CalenderWindow::on_button_press(Glib::ustring button)
 }
 void CalenderWindow::on_button_press_op(Glib::ustring button)
 {
-  std::cout<<"Op button pressed"<<std::endl;
+  //std::cout<<"Op button pressed"<<std::endl;
   std::string s = m_Entry_Display.get_text();
   if((std::string)(button) == "add")
   {
@@ -140,7 +140,7 @@ void CalenderWindow::on_button_press_op(Glib::ustring button)
 
 void CalenderWindow::on_button_press_eql()
 {
-  std::cout<<"eql button pressed"<<std::endl;
+  // std::cout<<"eql button pressed"<<std::endl;
 
   int result = 0;
   std::string s = m_Entry_Display.get_text();
